@@ -11,11 +11,12 @@ public class Main {
 
 
         int opcao = 0;
-        while (opcao != 3) {
+        while (opcao != 4) {
             System.out.println("\n--- MENU BANCÁRIO ---");
             System.out.println("1 - Depositar");
             System.out.println("2 - Sacar");
-            System.out.println("3 - Sair");
+            System.out.println("3 - Ver historico de transação");
+            System.out.println("4 - Sair");
             System.out.print("Escolha uma opção: ");
             opcao = Adicionar.nextInt();
 
@@ -29,16 +30,27 @@ public class Main {
             else if (opcao == 2) {
                 System.out.println("Qual o valor que deseja sacar?");
                 double valor = Adicionar.nextDouble();
-                ContaA.sacar(valor);
-                System.out.println("Saldo atual: R$ " + ContaA.getSaldo());
 
+                try {
+                    // O "try" tenta executar o código perigoso
+                    ContaA.sacar(valor);
+                } catch (SaldoInsuficienteException e) {
+                    // O "catch" captura o erro e mostra a mensagem que definimos lá na classe
+                    System.err.println("ALERTA: " + e.getMessage());
+                }
+
+                System.out.println("Saldo disponível: R$ " + ContaA.getSaldo());
             }
             else if (opcao == 3) {
-                System.out.println("Saindo........");
+                ContaA.exibirExtrato();
 
+
+            } else if (opcao == 4) {
+            }System.out.println("Saindo........");
             }
+                {
+                }
         }
 
 
     }
-}
